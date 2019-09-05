@@ -1,0 +1,89 @@
+<!---
+    The home page for the data visualizer
+
+    Purpose of this page:
+    Graph databases are interesting, but unless you are heavily into tech it can be hard to see why.
+    The Neo4J Browser provides a very good visualizer once you understand Cypher.
+    While explaining Neo4J it can be intimidating to people when they see Cypher / code.
+
+    This page aims to show (and help explain) why graphs are interesting, without having to
+    write or see any Cypher queries, unlike the built in Neo4J Browser
+
+    We will leverage:
+        -neoVis.js for the data visualization itself
+        -materialize.css for the web page components
+--->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Data Visualizer - Visualiseur de Données</title>
+    <!-- Load materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Load my custom CSS -->
+    <link href="static/index.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+    <!-- Load NeoVis.js -->
+    <script src="https://cdn.neo4jlabs.com/neovis.js/v1.1.0/neovis.js"></script>
+
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!-- Load my NeoVis JS Configs -->
+    <script src="static/index.js"></script>
+</head>
+
+<body onload="draw()">
+    <br>
+    <div class="container">
+
+        <div class="card-panel teal lighten-2">
+            <div id="viz"></div>
+            <br>
+
+            <div class="row">
+                <div class="col s2"></div>
+                <div class="col s2">
+                    <input class="btn-large" type="submit" value="Example 1" id="example1">
+                </div>
+                <div class="col s2">
+                    <input class="btn-large" type="submit" value="Example 2" id="example2">
+
+                </div>
+                <div class="col s2">
+                    <input class="btn-large" type="submit" value="Example 3" id="example3">
+                </div>
+                <div class="col s2">
+                    <input class="btn-large" type="submit" value="Example 4" id="example4">
+                </div>
+                <div class="col s2"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    $("#example1").click(function () {
+        var cypher = "MATCH (n:Valhalla_Respondent)-[r:LOCATED_IN]->(m:CP_CSD) RETURN n,r,m LIMIT 25";
+        viz.renderWithCypher(cypher);
+    });
+    $("#example2").click(function () {
+        var cypher = "MATCH (n:Valhalla_Response)-[r:AT_ORDER]->(m:Valhalla_Answer) RETURN n,r,m LIMIT 25";
+        viz.renderWithCypher(cypher);
+    });
+    $("#example3").click(function () {
+        var cypher = "MATCH (n:Valhalla_Question) RETURN n LIMIT 25";
+        viz.renderWithCypher(cypher);
+    });
+    $("#example4").click(function () {
+        var cypher = "MATCH (n:Valhalla_Survey) RETURN n LIMIT 25";
+        viz.renderWithCypher(cypher);
+    });
+</script>
+
+</html>

@@ -39,15 +39,15 @@
 </head>
 
 <body onload="draw()">
-    <br>
     <div class="container">
 
         <div class="card-panel teal lighten-2">
             <div id="viz"></div>
-            <br>
+            <div id="vis_desc">
+                <p id="vis_desc_par">First we get a course with its topic and delivery method!</p>
+            </div>
 
             <div class="row">
-                <div class="col s2"></div>
                 <div class="col s2">
                     <input class="btn-large" type="submit" value="Example 1" id="example1">
                 </div>
@@ -61,7 +61,13 @@
                 <div class="col s2">
                     <input class="btn-large" type="submit" value="Example 4" id="example4">
                 </div>
-                <div class="col s2"></div>
+                <div class="col s2">
+                    <input class="btn-large" type="submit" value="Example 5" id="example5">
+                </div>
+                <div class="col s2">
+                    <input class="btn-large" type="submit" value="Example 6" id="example6">
+                </div>
+
             </div>
         </div>
     </div>
@@ -69,20 +75,34 @@
 
 <script>
     $("#example1").click(function () {
-        var cypher = "MATCH (n:Valhalla_Respondent)-[r:LOCATED_IN]->(m:CP_CSD) RETURN n,r,m LIMIT 25";
+        var cypher = "MATCH (c:Course{code:'X042'})-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d";
         viz.renderWithCypher(cypher);
+        $("p#vis_desc_par").text("First we get a course with its topic and delivery method!");
     });
     $("#example2").click(function () {
-        var cypher = "MATCH (n:Valhalla_Response)-[r:AT_ORDER]->(m:Valhalla_Answer) RETURN n,r,m LIMIT 25";
+        var cypher = "MATCH (c:Course)-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d";
         viz.renderWithCypher(cypher);
+        $("p#vis_desc_par").text("For that same topic, now we get all courses and delivery methods. Note we only have one delivery method!");
     });
     $("#example3").click(function () {
-        var cypher = "MATCH (n:Valhalla_Question) RETURN n LIMIT 25";
+        var cypher = "MATCH (c:Course)-[r:TOPIC]->(n:Topic) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d";
         viz.renderWithCypher(cypher);
+        $("p#vis_desc_par").text("Now we retreive all courses, topic, and delivery methods!");
     });
     $("#example4").click(function () {
-        var cypher = "MATCH (n:Valhalla_Survey) RETURN n LIMIT 25";
+        var cypher = "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) RETURN n, nn, r";
         viz.renderWithCypher(cypher);
+        $("p#vis_desc_par").text("Changing gears, we get the Directors and the courses under them.");
+    });
+    $("#example5").click(function () {
+        var cypher = "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) WITH n, r, nn MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) WITH n, nn, nnn, r, rr RETURN n, nn, nnn, r, rr";
+        viz.renderWithCypher(cypher);
+        $("p#vis_desc_par").text("We can also see the communities between Directors and the Project Leads!");
+    });
+    $("#example6").click(function () {
+        var cypher = "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) WITH n, r, nn MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) WITH n, nn, nnn, r, rr MATCH (n)-[rrr:PROGRAM_MANAGER]->(nnnn:Person) WITH n, nn, nnn, nnnn, r, rr, rrr MATCH (n)-[rrrr:POINT_OF_CONTACT]->(nnnnn:Person) RETURN n, nn, nnn, nnnn, nnnnn, r, rr, rrr, rrrr";
+        viz.renderWithCypher(cypher);
+        $("p#vis_desc_par").text("Getting all people in the data and the relationships between the courses makes things get complex!");
     });
 </script>
 

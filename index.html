@@ -77,7 +77,7 @@
     $("#example1").click(function () {
         var cypher = "MATCH (c:Course{code:'X042'})-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d";
         viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("First we get a course with its topic and delivery method!");
+        $("p#vis_desc_par").text("First we get a course with it's topic and delivery method!");
     });
     $("#example2").click(function () {
         var cypher = "MATCH (c:Course)-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d";
@@ -87,22 +87,22 @@
     $("#example3").click(function () {
         var cypher = "MATCH (c:Course)-[r:TOPIC]->(n:Topic) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d";
         viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("Now we retreive all courses, topic, and delivery methods!");
+        $("p#vis_desc_par").text("Now we retreive all courses, topics, and delivery methods!");
     });
     $("#example4").click(function () {
         var cypher = "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) RETURN n, nn, r";
         viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("Changing gears, we get the Directors and the courses under them.");
+        $("p#vis_desc_par").text("Changing gears, we get the Directors and their courses.");
     });
     $("#example5").click(function () {
         var cypher = "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) WITH n, r, nn MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) WITH n, nn, nnn, r, rr RETURN n, nn, nnn, r, rr";
         viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("We can also see the communities between Directors and the Project Leads!");
+        $("p#vis_desc_par").text("Using that, we can begin to see the communities between Directors and the Project Leads!");
     });
     $("#example6").click(function () {
         var cypher = "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) WITH n, r, nn MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) WITH n, nn, nnn, r, rr MATCH (n)-[rrr:PROGRAM_MANAGER]->(nnnn:Person) WITH n, nn, nnn, nnnn, r, rr, rrr MATCH (n)-[rrrr:POINT_OF_CONTACT]->(nnnnn:Person) RETURN n, nn, nnn, nnnn, nnnnn, r, rr, rrr, rrrr";
         viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("Getting all people in the data and the relationships between the courses makes things get complex!");
+        $("p#vis_desc_par").text("Getting the remaining people and the relationships between the courses complicates things!");
     });
 </script>
 

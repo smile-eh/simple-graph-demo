@@ -4,40 +4,57 @@ var viz;
 function draw() {
     var config = {
         container_id: "viz",
-        server_url: "bolt://cortex.da-an.ca:7687",
+        server_url: "bolt://localhost:7687",
         server_user: "neo4j",
-        server_password: "##dis@da2019##",
+        server_password: "password",
         labels: {
-            "Valhalla_Question": {
-                "caption": "question",
-                "size": "answer_total",
-                "community": "community"
+            "Topic": {
+                "caption": "name_en",
+                "size": 5
             },
-            "Valhalla_Survey": {
-                "caption": false,
+            "Course": {
+                "caption": "code",
                 "size": 5,
-                "community": "community"
+                "community": 1919
             },
-            "Valhalla_Response": {
-                "caption": false,
-                "size": 5,
-                "community": "community"
+            "DeliveryType": {
+                "caption": "type_en",
+                "size": 5
             },
-            "Valhalla_Respondent": {
-                "caption": false,
+            "Person": {
+                "caption": "name",
                 "size": 5
             }
         },
         relationships: {
-            "AT_ORDER": {
-                "caption": false
+            "TOPIC": {
+                "caption": false,
+                "thickness": 5
+            },
+            "DELIVERED_VIA": {
+                "caption": false,
+                "thickness": 3
+            },
+            "DIRECTOR": {
+                "caption": false,
+                "thickness": 4
+            },
+            "PROGRAM_MANAGER": {
+                "caption": false,
+                "thickness": 3
+            },
+            "PROJECT_LEAD": {
+                "caption": false,
+                "thickness": 2
+            },
+            "POINT_OF_CONTACT": {
+                "caption": false,
+                "thickness": 1
             }
         },
-        initial_cypher: "MATCH (n:Valhalla_Respondent)-[r:LOCATED_IN]->(m:CP_CSD) RETURN n,r,m LIMIT 25"
+        initial_cypher: "MATCH (c:Course{code:'X042'})-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d"
     };
 
     viz = new NeoVis.default(config);
     viz.render();
-    console.log(viz);
-
 }

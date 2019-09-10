@@ -6,5 +6,7 @@ This page aims to show (and help explain) why graphs are interesting, without ha
 write or see any Cypher queries, unlike the built in Neo4J Browser!
 
 We will leverage:
+
     -neoVis.js for the data visualization
+    
     -materialize.css for the web page components

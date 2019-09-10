@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <!---
     The home page for the data visualizer
 
@@ -14,96 +16,86 @@
         -materialize.css for the web page components
 --->
 
-<!DOCTYPE html>
-
-<html>
-
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Data Visualizer - Visualiseur de Données</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
     <!-- Load materialize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css"
+        rel="stylesheet" media="screen,print" />
     <!-- Load my custom CSS -->
-    <link href="static/index.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="static/css/index.css" type="text/css" rel="stylesheet" media="screen,projection" />
 
-    <!-- Load NeoVis.js -->
-    <script src="https://cdn.neo4jlabs.com/neovis.js/v1.1.0/neovis.js"></script>
-
-    <!-- Load jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-    <!-- Load my NeoVis JS Configs -->
-    <script src="static/index.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="static/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/icons/favicon-16x16.png">
+    <link rel="manifest" href="static/icons/site.webmanifest">
+    <link rel="mask-icon" href="static/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
 </head>
 
-<body onload="draw()">
-    <div class="container">
-
-        <div class="card-panel teal lighten-2">
-            <div id="viz"></div>
-            <div id="vis_desc">
-                <p id="vis_desc_par">First we get a course with its topic and delivery method!</p>
+<body>
+    <div class="navbar-fixed no-print">
+        <nav class="white nav-extended">
+            <div class="nav-wrapper container">
+                <a id="logo-container" class="brand-logo">Cortex</a>
+                <ul id="nav-mobile" class="adm-function right hide-on-med-and-down">
+                    <li class="hide-on-small-only">
+                        <a class="dropdown-trigger" data-target="dropdown1">
+                            Visualizations <em class="material-icons right lhi-menu"
+                                aria-hidden="true">arrow_drop_down</em>
+                        </a>
+                    </li>
+                </ul>
             </div>
-
-            <div class="row">
-                <div class="col s2">
-                    <input class="btn-large" type="submit" value="Example 1" id="example1">
+        </nav>
+    </div>
+    <ul id="dropdown1" class="adm-function dropdown-content hide-on-small-only">
+    </ul>
+    <div id="editor" class="container">
+        <div class="row">
+            <div id="render_window" class="col s12">
+                <div class="card-panel">
+                    <div id="viz"></div>
+                    <div id="vis_desc">
+                        <p id="vis_desc_par">First we get a course with its topic and delivery method!</p>
+                    </div>
                 </div>
-                <div class="col s2">
-                    <input class="btn-large" type="submit" value="Example 2" id="example2">
-
-                </div>
-                <div class="col s2">
-                    <input class="btn-large" type="submit" value="Example 3" id="example3">
-                </div>
-                <div class="col s2">
-                    <input class="btn-large" type="submit" value="Example 4" id="example4">
-                </div>
-                <div class="col s2">
-                    <input class="btn-large" type="submit" value="Example 5" id="example5">
-                </div>
-                <div class="col s2">
-                    <input class="btn-large" type="submit" value="Example 6" id="example6">
-                </div>
-
             </div>
         </div>
     </div>
-</body>
-
-<script>
-    $("#example1").click(function () {
-        var cypher = "MATCH (c:Course{code:'X042'})-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d";
-        viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("First we get a course with it's topic and delivery method!");
-    });
-    $("#example2").click(function () {
-        var cypher = "MATCH (c:Course)-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d";
-        viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("For that same topic, now we get all courses and delivery methods. Note we only have one delivery method!");
-    });
-    $("#example3").click(function () {
-        var cypher = "MATCH (c:Course)-[r:TOPIC]->(n:Topic) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d";
-        viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("Now we retreive all courses, topics, and delivery methods!");
-    });
-    $("#example4").click(function () {
-        var cypher = "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) RETURN n, nn, r";
-        viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("Changing gears, we get the Directors and their courses.");
-    });
-    $("#example5").click(function () {
-        var cypher = "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) WITH n, r, nn MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) WITH n, nn, nnn, r, rr RETURN n, nn, nnn, r, rr";
-        viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("Using that, we can begin to see the communities between Directors and the Project Leads!");
-    });
-    $("#example6").click(function () {
-        var cypher = "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) WITH n, r, nn MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) WITH n, nn, nnn, r, rr MATCH (n)-[rrr:PROGRAM_MANAGER]->(nnnn:Person) WITH n, nn, nnn, nnnn, r, rr, rrr MATCH (n)-[rrrr:POINT_OF_CONTACT]->(nnnnn:Person) RETURN n, nn, nnn, nnnn, nnnnn, r, rr, rrr, rrrr";
-        viz.renderWithCypher(cypher);
-        $("p#vis_desc_par").text("Getting the remaining people and the relationships between the courses complicates things!");
-    });
-</script>
+    <footer id="admin_footer_end" class="page-footer purp-canada-ca">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h3 class="white-text">CORTEX (Evalhalla + Big Data)</h3>
+                    <p class="grey-text text-lighten-4">
+                        <span class="en">Alpha. CORTEX (Evalhalla + Big Data) is an experiment in making data become
+                            knowledge.</span>
+                    </p>
+                    <a class="brown-text text-lighten-3" href="https://github.com/DIS-SIN/">DIS-SIN Github</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <span class="en">Data that Informs.</span>
+            </div>
+        </div>
+    </footer>
+    <!-- Dependencies -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.includes%2Ces2015%2Ces6"
+        async defer></script>
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Load NeoVis.js -->
+    <script src="https://cdn.neo4jlabs.com/neovis.js/v1.1.0/neovis.js"></script>
+    <!-- Load my NeoVis JS Configs -->
+    <script src="static/js/index.js"></script>
 
 </html>

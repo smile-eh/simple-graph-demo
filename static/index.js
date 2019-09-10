@@ -4,9 +4,9 @@ var viz;
 function draw() {
     var config = {
         container_id: "viz",
-        server_url: "bolt://hobby-dfnbpmpepcidgbkefbbgondl.dbs.graphenedb.com:24787",
-        server_user: "github",
-        server_password: "b.EV7hUg2UuMnM.6GT2Vr6xoNrWFHeD",
+        server_url: "bolt://cortex.da-an.ca:7687",
+        server_user: "neo4j",
+        server_password: "##dis@da2019##",
         labels: {
             "Topic": {
                 "caption": "name_en",

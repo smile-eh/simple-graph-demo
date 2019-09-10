@@ -88,7 +88,7 @@ MERGE (c)-[:BUSINESS_LINE]->(bl)
 
 // Create a Community
 WITH c, row
-MERGE(com:Community{name_en:row.community_en, name_fr:row.community_fr})
+MERGE(com:Community{name_en:row.communities_en, name_fr:row.communities_fr})
 
 WITH c, com, row
 MERGE (c)-[:COMMUNITY]->(com)

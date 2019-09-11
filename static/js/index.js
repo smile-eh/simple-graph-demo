@@ -78,42 +78,78 @@ $(document).ready(function () {
             "icon": "assignment",
             "viztitle": "Course > Topic > Delivery",
             "description": "First we get a course with it's topic and delivery method!",
-            "cypher": "MATCH (c:Course{code:'X042'})-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d"
+            "cypher": `
+                MATCH (c:Course{code:'X042'})-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) 
+                WITH n, c, r 
+                MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) 
+                RETURN n, c, r, rr, d
+            `
         },
         {
             "cls": "menu-dd-2",
             "icon": "assignment",
             "viztitle": "Topic > All Courses + All Delivery",
             "description": "For that same topic, now we get all courses and delivery methods. Note we only have one delivery method!",
-            "cypher": "MATCH (c:Course)-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d"
+            "cypher": `
+                MATCH (c:Course)-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) 
+                WITH n, c, r 
+                MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) 
+                RETURN n, c, r, rr, d
+            `
         },
         {
             "cls": "menu-dd-3",
             "icon": "assignment",
             "viztitle": "All Courses + All Delivery",
             "description": "Now we retreive all courses, topics, and delivery methods!",
-            "cypher": "MATCH (c:Course)-[r:TOPIC]->(n:Topic) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d"
+            "cypher": `
+                MATCH (d:DeliveryType)<-[rr:DELIVERED_VIA]-(c:Course)-[r:TOPIC]->(n:Topic)
+                RETURN d,c,n,r,rr 
+            `/*`
+                MATCH (c:Course)-[r:TOPIC]->(n:Topic) 
+                WITH n, c, r 
+                MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) 
+                RETURN n, c, r, rr, d
+            `*/
         },
         {
             "cls": "menu-dd-4",
             "icon": "assignment",
             "viztitle": "Directors > Courses",
             "description": "Changing gears, we get the Directors and their courses.",
-            "cypher": "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) RETURN n, nn, r"
+            "cypher": `
+                MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) 
+                RETURN n, nn, r
+            `
         },
         {
             "cls": "menu-dd-5",
             "icon": "assignment",
             "viztitle": "Community > Director + Project Lead",
             "description": "Using that, we can begin to see the communities between Directors and the Project Leads!",
-            "cypher": "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) WITH n, r, nn MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) WITH n, nn, nnn, r, rr RETURN n, nn, nnn, r, rr"
+            "cypher": `
+                MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) 
+                WITH n, r, nn 
+                MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) 
+                WITH n, nn, nnn, r, rr 
+                RETURN n, nn, nnn, r, rr
+            `
         },
         {
             "cls": "menu-dd-6",
             "icon": "assignment",
             "viztitle": "The Rest (Trickier)",
             "description": "Getting the remaining people and the relationships between the courses complicates things!",
-            "cypher": "MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) WITH n, r, nn MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) WITH n, nn, nnn, r, rr MATCH (n)-[rrr:PROGRAM_MANAGER]->(nnnn:Person) WITH n, nn, nnn, nnnn, r, rr, rrr MATCH (n)-[rrrr:POINT_OF_CONTACT]->(nnnnn:Person) RETURN n, nn, nnn, nnnn, nnnnn, r, rr, rrr, rrrr"
+            "cypher": `
+                MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) 
+                WITH n, r, nn 
+                MATCH (n)-[rr:PROJECT_LEAD]->(nnn:Person) 
+                WITH n, nn, nnn, r, rr 
+                MATCH (n)-[rrr:PROGRAM_MANAGER]->(nnnn:Person) 
+                WITH n, nn, nnn, nnnn, r, rr, rrr 
+                MATCH (n)-[rrrr:POINT_OF_CONTACT]->(nnnnn:Person) 
+                RETURN n, nn, nnn, nnnn, nnnnn, r, rr, rrr, rrrr
+            `
         },
     ];
     // ok now to build up some html using some symbol replacement
@@ -132,7 +168,7 @@ $(document).ready(function () {
     for (let i = 1; i <= viz_items.length; i++) {
         $(".menu-dd-" + i).on("click", { "i": (i - 1) },
             function (e) {
-                viz.renderWithCypher(viz_items[e.data.i].cypher);
+                viz.renderWithCypher(viz_items[e.data.i].cypher.replace(/\n/, ' '));
                 $("p#vis_desc_par").text(viz_items[e.data.i].description);
             }
         );

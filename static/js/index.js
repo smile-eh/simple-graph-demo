@@ -132,7 +132,20 @@ $(document).ready(function () {
     for (let i = 1; i <= viz_items.length; i++) {
         $(".menu-dd-" + i).on("click", { "i": (i - 1) },
             function (e) {
-                viz.renderWithCypher(viz_items[e.data.i].cypher);
+
+                //While waiting for the query to complete, display a spinner
+                $("#loader").removeClass("query-complete");
+                $("#loader").addClass("query-loading");
+
+                //Send the query
+                viz.renderWithCypher(viz_items[e.data.i].cypher, function () {
+
+                    //Once the query has completed, hide the spinner
+                    setTimeout(function () {
+                        $("#loader").removeClass("query-loading");
+                        $("#loader").addClass("query-complete");
+                    }, 25);
+                });
                 $("p#vis_desc_par").text(viz_items[e.data.i].description);
             }
         );

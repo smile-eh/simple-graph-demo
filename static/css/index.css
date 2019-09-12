@@ -78,6 +78,11 @@ p {
     line-height: 2rem;
 }
 
+p strong {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
 .sidenav-trigger {
     color: #26a69a;
 }
@@ -344,7 +349,7 @@ legend {
 
 h1,
 h2 {
-    font-size: 2.28rem;
+    font-size: 1.28rem;
     line-height: 110%;
 }
 

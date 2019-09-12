@@ -174,7 +174,7 @@ $(document).ready(function () {
                 $("#loader").addClass("query-loading");
 
                 //Send the query
-                viz.renderWithCypher(viz_items[e.data.i].cypher, function () {
+                viz.renderWithCypher(viz_items[e.data.i].cypher.replace(/\n/, ' '), function () {
 
                     //Once the query has completed, hide the spinner
                     setTimeout(function () {

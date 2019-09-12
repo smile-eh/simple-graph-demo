@@ -52,7 +52,7 @@
 // 	Relate from Course with relationship PROJECT_LEAD
 
 // Download the data
-CALL apoc.load.csv("https://raw.githubusercontent.com/smile-eh/simple-graph-demo/master/data/course_info_cleaned.csv", {sep:"|"}) YIELD map as row 
+CALL apoc.load.csv("https://rawcdn.githack.com/smile-eh/simple-graph-demo/937314f2ff9a68e9ecd00a9b0ac999bf464dc4d2/data/course_info_cleaned.csv", {sep:"|"}) YIELD map as row 
 
 //Create a Course
 WITH row 

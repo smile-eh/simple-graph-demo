@@ -42,6 +42,7 @@
         <nav class="white nav-extended">
             <div class="nav-wrapper container">
                 <a id="logo-container" class="brand-logo">Cortex</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="adm-function right hide-on-med-and-down">
                     <li class="hide-on-small-only">
                         <a class="dropdown-trigger" data-target="dropdown1">
@@ -52,7 +53,15 @@
                 </ul>
             </div>
         </nav>
+
+
     </div>
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">Javascript</a></li>
+        <li><a href="mobile.html">Mobile</a></li>
+    </ul>
     <ul id="dropdown1" class="adm-function dropdown-content hide-on-small-only">
     </ul>
     <div id="editor" class="container">
@@ -60,9 +69,21 @@
             <div id="render_window" class="col s12">
                 <div class="card-panel">
                     <div id="loader" class="loader query-complete"></div>
+                    <div id="vis_title">
+                        <h1>
+                            First we get a course with it's topic and delivery method!
+                        </h1>
+                    </div>
                     <div id="viz"></div>
                     <div id="vis_desc">
-                        <p id="vis_desc_par">First we get a course with its topic and delivery method!</p>
+                        <p>
+                            In this example, we're picking a Course that we're interested in. In this case it's a Course
+                            that is in Human Resouces with it's corresponding delivery method. <strong>We can find out
+                                individual information
+                                about this content quickly and easily. But this is just the "anchor point"</strong>. The
+                            real power comes from
+                            exploring outward from what you choose.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -95,7 +116,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/1.0.10/purify.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Load NeoVis.js -->
-    <script src="https://rawcdn.githack.com/smile-eh/neovis.js/87132bc3dd3fb4c683791179732ec9d1c80c6d6d/dist/neovis.js"></script>
+    <script
+        src="https://rawcdn.githack.com/smile-eh/neovis.js/87132bc3dd3fb4c683791179732ec9d1c80c6d6d/dist/neovis.js"></script>
     <!-- Load my NeoVis JS Configs -->
     <script src="static/js/index.js"></script>
 

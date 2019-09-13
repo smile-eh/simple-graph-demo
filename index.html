@@ -68,13 +68,15 @@
         <div class="row">
             <div id="render_window" class="col s12">
                 <div class="card-panel">
-                    <div id="loader" class="loader query-complete"></div>
                     <div id="vis_title">
                         <h1>
                             First we get a course with it's topic and delivery method!
                         </h1>
                     </div>
-                    <div id="viz"></div>
+                    <div id="viz-loader-wrapper">
+                        <div id="viz"></div>
+                        <div id="loader" class="loader query-complete"></div>
+                    </div>
                     <div id="vis_desc">
                         <p>
                             In this example, we're picking a Course that we're interested in. In this case it's a Course

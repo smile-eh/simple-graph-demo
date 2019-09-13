@@ -22,6 +22,7 @@ html,
     /*background-color: white;*/
     /*border: 1px solid lightgray;*/
     font-size: 22pt;/*22pt Georgia;*/
+    position: relative;
 }
 
 #vis_desc_par{
@@ -38,7 +39,7 @@ html,
     -webkit-animation: spin 2s linear infinite; /* Safari */
     animation: spin 2s linear infinite;
     position: absolute;
-    top: 45%;
+    bottom: 0%;
     left: 45%;
     font-size: 40px;
     z-index: 10;

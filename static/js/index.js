@@ -52,7 +52,7 @@ function draw() {
                 "thickness": 1
             }
         },
-        initial_cypher: "MATCH (c:Course{code:'X042'})-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) WITH n, c, r MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) RETURN n, c, r, rr, d"
+        initial_cypher: "MATCH (n_cou:Course{code:'X042'})-[r_top:TOPIC]->(n_top:Topic{name_en:'Human Resources'}) WITH n_top, n_cou, r_top MATCH (n_cou)-[r_delvia:DELIVERED_VIA]->(n_deltyp:DeliveryType) RETURN n_top, n_cou, r_top, r_delvia, n_deltyp"
     };
 
     viz = new NeoVis.default(config);
@@ -90,10 +90,10 @@ $(document).ready(function () {
                 </p>                
             `,
             "cypher": `
-                MATCH (c:Course{code:'X042'})-[r:TOPIC]->(n:Topic{name_en:'Human Resources'}) 
-                WITH n, c, r 
-                MATCH (c)-[rr:DELIVERED_VIA]->(d:DeliveryType) 
-                RETURN n, c, r, rr, d
+                MATCH (n_cou:Course{code:'X042'})-[r_top:TOPIC]->(n_top:Topic{name_en:'Human Resources'}) 
+                WITH n_top, n_cou, r_top
+                MATCH (n_cou)-[r_delvia:DELIVERED_VIA]->(n_deltyp:DeliveryType)
+                RETURN n_top, n_cou, r_top, r_delvia, n_deltyp
             `
         },
         {
@@ -220,6 +220,27 @@ $(document).ready(function () {
                 WITH n, nn, nnn, nnnn, r, rr, rrr 
                 MATCH (n)-[rrrr:POINT_OF_CONTACT]->(nnnnn:Person) 
                 RETURN n, nn, nnn, nnnn, nnnnn, r, rr, rrr, rrrr
+            `
+        },
+        {
+            "cls": "menu-dd-7",
+            "icon": "assignment",
+            "vizmenutitle": "Community > Director + Topics",
+            "viztitle": `
+                <h1>
+                    Using that, we can begin to see the communities between Directors and the Topics!
+                </h1>
+            `,
+            "description": `
+                <p>
+                </p>
+            `,
+            "cypher": `
+                MATCH (n:Course)-[r:DIRECTOR]->(nn:Person) 
+                WITH n, r, nn 
+                MATCH (n)-[rr:TOPIC]->(nnn:Topic) 
+                WITH n, nn, nnn, r, rr 
+                RETURN n, nn, nnn, r, rr
             `
         },
     ];

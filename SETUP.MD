@@ -91,7 +91,7 @@ Next we go to the Terminal tab to get our graph install location.
 
 ### Copy the data to the import folder at this location
 
-If you are comfortable using a GUI, you can simply copy the file `data/course_info_cleaned.csv` to the import folder shown in the Terminal tab. I you'd like command line instructions, follow along below:
+If you are comfortable using a GUI, you can simply copy the file `data/course_info_cleaned.csv` to the import folder within the location shown in the Terminal tab. I you would prefer command line instructions, follow along below:
 
 We highlight the blue text from AFTER the first tilde character `~` to the character just BEFORE the dollar sign `$`
 

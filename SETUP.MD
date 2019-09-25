@@ -1,4 +1,4 @@
-# Recreating simple-graph-demo locally
+# Setting up simple-graph-demo locally
 
 This instruction set aims to get you up and running with the code locally so you can begin exploring with graphs!
 
@@ -56,6 +56,9 @@ Now the we have data that has been cleaned up a little we can load it into Neo4J
 
 ### Create and set up the graph!
 First we have to set up a graph to load data into. Open Neo4J Desktop and from the main screen, create a new graph.
+
+Set the Graph Name to `my-introductory-graph` and the Password to `neo4-graph-demo-credentials1!`
+
 ** neo4j add graph image **
 
 Make sure to add the APOC Plugin!
@@ -74,7 +77,7 @@ We hightlight the blue text from AFTER the first tilde character `~` to the char
 
 Copy this text. Our install location is this (but yours will be different!)
 ```
-/.config/Neo4j Desktop/Application/neo4jDatabases/database-d83ba254-f628-4ea4-b983-5aa6abc553a9/base-d83ba254-f628-4ea4-b983-5aa6abc553a9/installation-3.5.6
+/.config/Neo4j Desktop/Application/neo4jDatabases/database-d8.........3a9/installation-3.5.6
 ```
 
 Back in our original bash terminal screen, the one we used to run python we will copy the data we cleaned into the import location for Neo4J.
@@ -107,10 +110,10 @@ server_user: "neo4j",
 server_password: "##dis@da2019##",
 ```
 
-Modify this content to the following, it is the information we entered when creating our graph in Neo4K Desktop.
+Modify this content to the following, it is the information we entered when creating our graph in Neo4J Desktop.
 ```
 server_url: "bolt://localhost:7687",
-server_user: "demo-user",
+server_user: "neo4j",
 server_password: "neo4-graph-demo-credentials1!",
 ```
 (Note the warning comments, they do no apply to what we are peforming so don't worry)
@@ -118,6 +121,7 @@ server_password: "neo4-graph-demo-credentials1!",
 Save the file and exit the editor!
 
 We are all complete, so now it is time to open the file `index.html` with Firefox!
+
 Chrome will work but is not as fast when visualizing.
 
 # Thanks for following along!

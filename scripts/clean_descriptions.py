@@ -29,7 +29,7 @@ def begin_cleanup():
     # data_proper_lines = clean_file_only_proper_lines(data_raw)
     # data_final = clean_file_remove_tags(data_proper_lines)
     # output_file(data_final)
-    input_filename = "./data/raw_course_info.csv"
+    input_filename = "./data/course_info_raw.csv"
     data_raw = read_file(input_filename)
     data_proper_lines = clean_file_only_proper_lines(data_raw)
     data_final = clean_file_remove_tags(data_proper_lines)
@@ -56,8 +56,12 @@ Purpose of this method
 """
 
 def clean_file_only_proper_lines(data_raw):
+    # Create an array of lines that we are keeping
     proper_line_list = []
+    # Add the header line to the output
+    proper_line_list.append(data_raw[0])
     for record in data_raw:
+        # if the descriptions is one we have cleanup function for, add it to output
         if record[1].startswith("<h2>Description</h2> <p>"):
             proper_line_list.append(record)
     return proper_line_list
@@ -72,13 +76,19 @@ def clean_file_remove_tags(data_proper_lines):
     tagless_list = []
     for record in data_proper_lines:
         new_record = record
-        
+
+
+        # Remove the header and paragraph tags from the description columns (en/fr)
         new_record[1] = new_record[1].replace("<h2>Description</h2> <p>", "")
         new_record[1] = new_record[1].replace("</p>", "")
-         
+
         new_record[2] = new_record[2].replace("<h2>Description</h2> <p>", "")
         new_record[2] = new_record[2].replace("</p>", "")
-        
+
+        # Remove any newline character from the communities columns (en/fr)
+        new_record[16] = new_record[16].replace("\n", "")
+        new_record[17] = new_record[17].replace("\n", "")
+
         tagless_list.append(new_record)
     return tagless_list
 
@@ -90,11 +100,11 @@ Purpose of this method
     Each index of inner array will be a new record, seperated by a comma
 """
 def write_file(data_to_write):
-    with open("eggs.csv", "w") as csvfile:
-        spamwriter = csv.writer(csvfile, delimiter="|")
+    with open("./data/course_info_cleaned.csv", "w") as csvfile:
+        writer = csv.writer(csvfile, delimiter="|")
         for record in data_to_write:
-            spamwriter.writerow(record)
-    print("done")
+            writer.writerow(record)
+    print("Completed output to data/course_info_cleaned.csv")
 
 if __name__ == "__main__":
     begin_cleanup()

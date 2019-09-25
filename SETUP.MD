@@ -1,4 +1,4 @@
-# Recreating simple-graph-demo locally
+# Setting up simple-graph-demo locally
 
 This instruction set aims to get you up and running with the code locally so you can begin exploring with graphs!
 

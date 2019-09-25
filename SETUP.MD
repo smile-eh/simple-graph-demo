@@ -99,7 +99,7 @@ cp data/course_info_cleaned.csv -t "/home/YOUR_USERNAME_HERE/YOUR_LOCATION_HERE/
 ### Run the load query
 Our graph is all set up and ready to read the data! First in a text editor we open the file `queries/load_courses_local.cypher`
 
-This long query loads everything into the graph! Copy all of the text (`Ctrl + A` followed by `Ctrl + C`) then go back to the Neo4J Desktop. Click on Neo4J Browser.
+This long query loads everything into the graph! Copy all of the text (`Ctrl + A` followed by `Ctrl + C`) then go back to the Neo4J Desktop. If your graph has not started yet, click start, then click on Neo4J Browser.
 
 In the query box, paste (`Ctrl + V`) the long query we just copied. Press `Ctrl + Enter` to execute a multi-line query.
 

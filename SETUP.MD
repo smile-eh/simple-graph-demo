@@ -56,6 +56,9 @@ Now the we have data that has been cleaned up a little we can load it into Neo4J
 
 ### Create and set up the graph!
 First we have to set up a graph to load data into. Open Neo4J Desktop and from the main screen, create a new graph.
+
+Set the Graph Name to `my-introductory-graph` and the Password to `neo4-graph-demo-credentials1!`
+
 ** neo4j add graph image **
 
 Make sure to add the APOC Plugin!
@@ -110,7 +113,7 @@ server_password: "##dis@da2019##",
 Modify this content to the following, it is the information we entered when creating our graph in Neo4J Desktop.
 ```
 server_url: "bolt://localhost:7687",
-server_user: "demo-user",
+server_user: "neo4j",
 server_password: "neo4-graph-demo-credentials1!",
 ```
 (Note the warning comments, they do no apply to what we are peforming so don't worry)

@@ -4,6 +4,8 @@ var viz;
 function draw() {
     var config = {
         container_id: "viz",
+        // Dev credentials, meant to be visible
+        // Don't push production credentials! Don't modify then post online unless you know what you're doing!
         server_url: "bolt://cortex.da-an.ca:7687",
         server_user: "neo4j",
         server_password: "##dis@da2019##",

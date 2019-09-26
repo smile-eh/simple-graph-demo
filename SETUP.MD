@@ -10,6 +10,7 @@ It assumes you are familiar with python or other programming languages, are comf
  - Python 3 ([Conda](https://conda.io/) suggested)
  - Linux or Mac suggested
  - Firefox (much faster with neovis.js library) or Chrome
+ - [Git](https://git-scm.com/)
 
 ## Get the repository
 ```sh

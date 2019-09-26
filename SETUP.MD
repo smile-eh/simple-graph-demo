@@ -74,13 +74,25 @@ Click on Manage then go to the Plugins tab, under APOC click `Install`
 
 ![Add APOC Plugin](docs/imgs/add_apoc.png?raw=true "Installing the APOC Plugin for Neo4J")
 
+Enable data import.
+
+Click on the Setting tab, then scroll to the bottom.
+
+![Enable Data Import](docs/imgs/enable_import.png?raw=true "Enabling data import for the APOC Plugin")
+
+Add the following line to the end then click `Apply`:
+
+```
+apoc.import.file.enabled=true
+```
+
 Next we go to the Terminal tab to get our graph install location.
 
 ![Terminal Tab Install Location](docs/imgs/terminal_highlight.png?raw=true "Viewing the Terminal tab in Neo4J Desktop with out Installation location Highlighted")
 
 ### Copy the data to the import folder at this location
 
-If you are comfortable using a GUI, you can simply copy the file `data/course_info_cleaned.csv` to the import folder shown in the Terminal tab. I you'd like command line instructions, follow along below:
+If you are comfortable using a GUI, you can simply copy the file `data/course_info_cleaned.csv` to the import folder within the location shown in the Terminal tab. I you would prefer command line instructions, follow along below:
 
 We highlight the blue text from AFTER the first tilde character `~` to the character just BEFORE the dollar sign `$`
 

@@ -26,6 +26,10 @@ function draw() {
             "Person": {
                 "caption": "name",
                 "size": 5
+            },
+            "GoogleCategorization": {
+                "caption": "category",
+                "size": 5
             }
         },
         relationships: {
@@ -52,7 +56,11 @@ function draw() {
             "POINT_OF_CONTACT": {
                 "caption": false,
                 "thickness": 1
-            }
+            },
+            "GOOGLE_CATEGORY": {
+                "caption": false,
+                "thickness": 2
+            },
         },
         initial_cypher: "MATCH (n_cou:Course{code:'X042'})-[r_top:TOPIC]->(n_top:Topic{name_en:'Human Resources'}) WITH n_top, n_cou, r_top MATCH (n_cou)-[r_delvia:DELIVERED_VIA]->(n_deltyp:DeliveryType) RETURN n_top, n_cou, r_top, r_delvia, n_deltyp"
     };
@@ -243,6 +251,44 @@ $(document).ready(function () {
                 MATCH (n)-[rr:TOPIC]->(nnn:Topic) 
                 WITH n, nn, nnn, r, rr 
                 RETURN n, nn, nnn, r, rr
+            `
+        },
+        {
+            "cls": "menu-dd-8",
+            "icon": "assignment",
+            "vizmenutitle": "Community > Courses + Google Categorization",
+            "viztitle": `
+                <h1>
+                    The Courses with the categorization from Google's NLP API!
+                </h1>
+            `,
+            "description": `
+                <p>
+                </p>
+            `,
+            "cypher": `
+            MATCH (c_node:Course)-[gc_rel:GOOGLE_CATEGORY]->(gc_node:GoogleCategorization) 
+            RETURN c_node, gc_rel, gc_node
+            `
+        },
+        {
+            "cls": "menu-dd-9",
+            "icon": "assignment",
+            "vizmenutitle": "Community > Courses + Google Categorization + Original Topics",
+            "viztitle": `
+                <h1>
+                    The Courses with the original topic now with the categorization from Google's NLP API!
+                </h1>
+            `,
+            "description": `
+                <p>
+                </p>
+            `,
+            "cypher": `
+            MATCH (c_node:Course)-[t_rel:TOPIC]->(t_node:Topic) 
+            WITH c_node, t_rel, t_node
+            MATCH (c_node)-[gc_rel:GOOGLE_CATEGORY]->(gc_node:GoogleCategorization) 
+            RETURN c_node, t_rel, t_node, gc_rel, gc_node
             `
         },
     ];

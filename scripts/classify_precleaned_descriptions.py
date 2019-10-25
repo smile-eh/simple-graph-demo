@@ -147,13 +147,13 @@ class CSVClassifier:
     """
 
     def write_file(self, data_to_write):
-        with open("./data/output_1.csv", "w") as csvfile:
+        with open("./data/output_1.csv", "w", encoding="utf-8") as csvfile:
             writer = csv.writer(
                 csvfile, delimiter=",", quotechar='"', quoting=csv.QUOTE_MINIMAL
             )
             for record in data_to_write:
                 writer.writerow(record)
-        print("Completed output to data/course_info_cleaned.csv")
+        print("Completed output to data/output_1.csv")
 
     """
     Purpose of this method
@@ -183,7 +183,7 @@ class CSVClassifier:
 def begin_classification():
     print("Begin classification...")
     classifier = CSVClassifier(
-        file_location="./data/csps_working_product_list_reduced.csv",
+        file_location="./data/csps_working_product_list_test.csv",
         column_header="Description (EN)",
     )
     classifier.classify_file()

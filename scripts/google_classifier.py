@@ -9,6 +9,9 @@ from google.cloud.language import types
 
 import six
 
+import os
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="C:\\Users\\computer\\DigitalAcadamy\\np.json"
+
 LANGUAGE = "english"
 SENTENCES_COUNT = 1
 
